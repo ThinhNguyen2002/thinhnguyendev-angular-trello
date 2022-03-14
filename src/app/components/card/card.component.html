@@ -1,0 +1,8 @@
+<div class="card-item"> 
+    <img *ngIf="card.cover"
+        :src={{card.cover}}
+        alt="thinhnguyen"
+        (mousedown)="handleImg($event)"
+    /> 
+  {{card.title}}
+</div> 

@@ -1,0 +1,125 @@
+<div class="column">
+  <header class="column-drag-handle">
+    <div class="column-title">
+      <input
+        class="trello-content-editable form-control form-control-sm"
+        type="text"
+        placeholder="Enter column title..."
+        spellcheck="false"
+        [value]="column.title"
+        (click)="selectAllInlineText($event)"
+        (blur)="handleTitleColumnBlur($event)"
+        (keydown)="saveContentAfterPressEnter($event)"
+        (mousedown)="onMouseDown($event)"
+      />
+    </div>
+
+    <div class="column-dropdow-actions">
+      <div class="d-inline-block dropdown" ngbDropdown #myDrop="ngbDropdown">
+        <button
+          class="btn btn-outline-primary me-2 dropdown-btn"
+          id="dropdownManual"
+          ngbDropdownAnchor
+          (focus)="myDrop.open()"
+        ></button>
+        <div
+          ngbDropdownMenu
+          aria-labelledby="dropdownManual"
+          class="dropdown-menu"
+        >
+          <button
+            class="dropdown-item"
+            ngbDropdownItem
+            (click)="toggleOpentNewCardForm()"
+          >
+            Add card...
+          </button>
+          <button
+            class="dropdown-item"
+            ngbDropdownItem
+            (click)="onRemoveColumn(column)"
+          >
+            Remove column...
+          </button>
+          <button class="dropdown-item" ngbDropdownItem>
+            Move all cards in this column (beta)...
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="card-list">
+    <smooth-dnd-container
+      [groupName]="'col'"
+      [dragClass]="'card-ghost'"
+      [dropClass]="'card-ghost-drop'"
+      (drop)="onCardDrop(column._id, $event)"
+      [getChildPayload]="getCardPayload(column._id)"
+    >
+      <smooth-dnd-draggable *ngFor="let card of column.cards">
+        <app-card [card]="card"></app-card>
+      </smooth-dnd-draggable>
+    </smooth-dnd-container>
+    <div class="add-new-card-area" *ngIf="isAddCardForm">
+      <textarea
+        id="input-new-card"
+        col="3"
+        placeholder="Enter a title for this card..."
+        class="area-enter-new-card form-control form-control-sm"
+        (keydown)="saveContentAfterPressEnter($event)"
+        [(ngModel)]="contentNewCard"
+        (click)="selectAllInlineText($event)"
+      ></textarea>
+    </div>
+  </div>
+  <footer>
+    <div class="add-new-card-actions" *ngIf="isAddCardForm">
+      <button
+        class="btn btn-success btn-sm"
+        type="button"
+        (click)="onAddCard()"
+      >
+        Add card
+      </button>
+      <span class="cancle-icon" (click)="toggleOpentNewCardForm()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-trash"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+          />
+        </svg>
+      </span>
+    </div>
+
+    <!-- action opent -->
+    <div
+      class="footer-actions"
+      *ngIf="!isAddCardForm"
+      (click)="toggleOpentNewCardForm()"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        fill="currentColor"
+        class="bi bi-plus"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"
+        />
+      </svg>
+      <span> Add another card </span>
+    </div>
+  </footer>
+</div>

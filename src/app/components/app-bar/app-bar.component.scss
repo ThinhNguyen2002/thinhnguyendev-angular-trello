@@ -1,0 +1,145 @@
+$appbar-bg-color: #0067a3;
+$gap: 10px;
+$column-bg-color: #ebecf0;
+$app-main-text-color: #333;
+
+$color-icon: #f1eeeeeb;
+$background-icon: #f3f3f354;
+
+.navbar-app {
+  height: 6vh;
+  background-color: $appbar-bg-color;
+  font-size: 1.5rem;
+
+  .app-bar-left { 
+    .wrap-item {
+      margin-top: 3.5px;
+      display: flex;
+
+      .item {
+        cursor: pointer;
+        background-color: $background-icon;
+        height: 30px;
+        margin-left: 5px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 2px;
+        color: $color-icon;
+
+        &.item-fist {
+          margin-left: 15px;
+        }
+
+        &.home {
+          width: 35px;
+        }
+
+        &.boards {
+          span {
+            padding-right: 10px;
+            font-size: 13px;
+          }
+          svg {
+            margin-left: 10px;
+            margin-right: 2px;
+          }
+        }
+
+        &.search {
+          span {
+            padding-left: 15px;
+            padding-right: 50px;
+            font-size: 13px;
+          }
+          svg {
+            margin-left: 30px;
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  .app-bar-center {
+    padding-top: 5px;
+    span {
+      font-size: 16px;
+      color: $color-icon;
+    }
+    img {
+      margin-left: 155px;
+    }
+  }
+
+  .app-bar-right {
+    .wrap-item {
+      margin-top: 3.5px;
+      display: flex;
+      justify-content: right;
+
+      .item {
+        cursor: pointer;
+        background-color: $background-icon;
+        height: 30px;
+        margin-left: 5px;
+        text-align: center;
+        line-height: 25px;
+        border-radius: 2px;
+        color: $color-icon;
+        padding: 0 10px;
+        svg {
+          width: 14px;
+        }
+      }
+    }
+  }
+
+  // align-items: center;
+  // justify-content: right;
+
+  .wraper-avartar {
+    img {
+      width: 35px;
+      border-radius: 35px;
+      margin-top: 3.5px;
+    }
+    .action {
+      border: none;
+      background: #0067a3;
+    }
+    .column-dropdow-actions {
+      //   flex: 10%;
+      .dropdown {
+        button.dropdown-btn {
+          padding: 0 $gap;
+          font-size: 16px;
+          font-weight: bold;
+          height: 32px;
+          margin-top: -20px;
+          letter-spacing: 1px;
+          border-color: $column-bg-color;
+          color: $app-main-text-color;
+
+          &:after {
+            content: "";
+            border: none;
+            vertical-align: 1.255em;
+          }
+        }
+      }
+
+      .dropdown-menu {
+        padding: 0;
+        min-width: 200px;
+        .dropdown-item {
+          padding: 10px;
+          font-size: 14px;
+
+          &:not(:last-child) {
+            border-bottom: 1px solid darken($column-bg-color, 10);
+          }
+        }
+      }
+    }
+  }
+}
